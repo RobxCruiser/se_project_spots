@@ -47,12 +47,17 @@
 
 @media screen and (max-width: 627px) {
   .card__image {
-    height: 318px;
+    height: 288px;
     width: 288px;
   }
 
   .card__title {
     max-width: 250px;
-    font-size: 16;git
+    font-size: 16px;
+  }
+
+  .card__like-btn {
+    width: 20px;
+    height: 18px;
   }
 }
