@@ -61,9 +61,7 @@ You can view the deployed project on **GitHub Pages** here:
 
 Watch the full project overview in this video:
 
-[![Spots Project Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-
-Click the image or [this link](https://www.youtube.com/watch?v=YOUR_VIDEO_ID) to watch the video on YouTube.
+[!Spots Project Video] click this link (https://drive.google.com/file/d/1gsl8KH0rsCfiCAdNpwsoows_YgMMmevl/view?usp=sharing) to watch the video.
 
 ---
 
