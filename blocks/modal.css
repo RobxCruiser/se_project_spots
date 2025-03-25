@@ -13,7 +13,7 @@
   padding: 0 20px;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 
@@ -71,11 +71,12 @@
   font-size: 20px;
   line-height: 1;
   color: #212121;
-  opacity: 30%;
+  opacity: 40%;
+  border-radius: 8px;
 }
 
 .modal__input:hover {
-  opacity: 30%;
+  opacity: 100%;
   cursor: pointer;
   color: #212121;
 }
@@ -97,6 +98,10 @@
   line-height: 1;
   background-color: #212121;
   color: #fcf5e5;
+}
+
+.modal__submit-btn:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {
