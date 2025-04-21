@@ -70,15 +70,13 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 1;
-  color: #212121;
-  opacity: 40%;
+  border: solid 1px rgba(33, 33, 33, 0.4)
   border-radius: 8px;
 }
 
 .modal__input:hover {
-  opacity: 100%;
   cursor: pointer;
-  color: #212121;
+  border: solid 1px rgba(33, 33, 33, 1)
 }
 
 .modal__input:user-valid {
@@ -102,6 +100,7 @@
 
 .modal__submit-btn:hover {
   cursor: pointer;
+  opacity: 80%;
 }
 
 @media screen and (max-width: 627px) {
