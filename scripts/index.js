@@ -69,10 +69,15 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
 
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
-
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-btn_active");
   });
+
+  const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
+  cardDeleteBtn.addEventListener("click", function () {
+    cardDeleteBtn.closest(".card").remove();
+  });
+
   return cardElement;
 }
 
@@ -121,7 +126,9 @@ initialCards.forEach(function (item) {
 });
 
 // TODO
-//  1. Add listenters to the Add card Modal close button, then on a click  we close our modal - also do this for editprofileCloseBtn
+// 1. Add listenters to the Add card Modal close button, then on a click  we close our modal - also do this for editprofileCloseBtn
 // 2.  Add the listener on our add card form submit event then save teh card
 // 3. Clean our index. js file
 // 4. un-comment addCardFormElement and connect correct variables.
+// 5. create like button, add css and Javascript.
+// 5. create delete button, add css and Javascript.
