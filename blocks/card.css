@@ -42,7 +42,7 @@
 }
 
 .card__like-btn_active {
-  background-image: url(../images/State=Liked.svg);
+  background-image: url(../images/Union.svg);
   opacity: 100%;
 }
 
