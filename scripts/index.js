@@ -98,7 +98,7 @@ addCardFormElement.addEventListener("submit", function (evt) {
   const cardElement = getCardElement(inputValues);
   cardList.prepend(cardElement);
 
-  addCardModal.classList.remove("openModal");
+  closeModal(addCardModal);
 });
 
 newPostButton.addEventListener("click", function () {
