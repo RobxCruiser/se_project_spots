@@ -1,5 +1,9 @@
 const initialCards = [
   {
+    name: "San Francisco",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+  },
+  {
     name: "Val Thorens",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
   },
@@ -48,6 +52,14 @@ const addCardTitle = addCardModal.querySelector("#add-card-title-input");
 const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".cards__list");
 
+// preview window
+const previewModal = document.querySelector("#modal-image-preview");
+const previewImage = previewModal.querySelector(".preview__image");
+const previewTitle = previewModal.querySelector(".preview__title");
+const previewCloseButton = previewModal.querySelector(
+  ".modal__preview-close-btn"
+);
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
@@ -76,6 +88,13 @@ function getCardElement(data) {
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
   cardDeleteBtn.addEventListener("click", function () {
     cardDeleteBtn.closest(".card").remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    previewImage.src = data.link;
+    previewImage.alt = data.name;
+    previewTitle.textContent = data.name;
+    openModal(previewModal);
   });
 
   return cardElement;
@@ -114,6 +133,11 @@ profileEditButton.addEventListener("click", function () {
 editModalCloseBtn.addEventListener("click", function () {
   closeModal(editModal);
 });
+
+previewCloseButton.addEventListener("click", function () {
+  closeModal(previewModal);
+});
+
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 
 addCardModalClose.addEventListener("click", function () {
@@ -126,9 +150,5 @@ initialCards.forEach(function (item) {
 });
 
 // TODO
-// 1. Add listenters to the Add card Modal close button, then on a click  we close our modal - also do this for editprofileCloseBtn
-// 2.  Add the listener on our add card form submit event then save teh card
-// 3. Clean our index. js file
-// 4. un-comment addCardFormElement and connect correct variables.
-// 5. create like button, add css and Javascript.
-// 5. create delete button, add css and Javascript.
+// 2. get image insert src atribute and title elemnt insert text (style preview title according to figma)
+// 3. close modal needs to be added and styled according to figma for both screen siz
