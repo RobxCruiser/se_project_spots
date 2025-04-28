@@ -42,7 +42,7 @@
 }
 
 .card__like-btn_active {
-  background-image: url(../images/LikeBtnActive.svg);
+  background-image: url(../images/Like-btn-active.svg);
   opacity: 100%;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .card__delete-button {
-  background-image: url(../images/Delete-Icon.svg);
+  background-image: url(../images/Delete-icon.svg);
   background-color: transparent;
   border: none;
   height: 32px;
@@ -68,7 +68,7 @@
 
 .card__delete-button:hover {
   cursor: pointer;
-  background-image: url(../images/delete-hover.svg);
+  background-image: url(../images/Delete-hover.svg);
 }
 
 @media screen and (max-width: 627px) {
