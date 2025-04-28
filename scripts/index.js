@@ -53,9 +53,9 @@ const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".cards__list");
 
 // preview window
-const previewModal = document.querySelector("#modal-image-preview");
-const previewImage = previewModal.querySelector(".preview__image");
-const previewTitle = previewModal.querySelector(".preview__title");
+const previewModal = document.querySelector("#image-preview");
+const previewImage = previewModal.querySelector(".modal__preview-image");
+const previewTitle = previewModal.querySelector(".modal__preview-title");
 const previewCloseButton = previewModal.querySelector(
   ".modal__preview-close-btn"
 );

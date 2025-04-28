@@ -62,6 +62,7 @@
                 id="profile-name-input"
                 type="text"
                 class="modal__input"
+                required
                 placeholder="Type your name"
               />
             </label>
@@ -89,7 +90,7 @@
                 id="add-card-link-input"
                 type="text"
                 class="modal__input"
-                placeholder="Past a link to the picture"
+                placeholder="Paste a link to the picture"
               />
             </label>
             <label class="modal__label"
@@ -105,14 +106,14 @@
           </form>
         </div>
       </div>
-      <!-- --the preview Image modal -->
-      <div id="modal-image-preview" class="modal modal__image-preview">
+      <!-- the preview Image modal -->
+      <div id="image-preview" class="modal modal__image-preview">
         <div class="modal__preview-container">
          <button class="modal__close-btn modal__preview-close-btn"></button>
-         <img src="" alt="" class="preview__image" />
-         <h2 class="preview__title"></h2>
+         <img src="#" alt="" class="modal__preview-image" />
+         <h2 class="modal__preview-title"></h2>
         </div>
-        </div>
+      </div>
     <script defer src="./scripts/index.js"></script>
   </body>
 </html>

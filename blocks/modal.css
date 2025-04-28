@@ -103,14 +103,14 @@
   opacity: 80%;
 }
 
-.preview__image {
+.modal__preview-image {
   max-width: 80vw;
   max-height: 80vh;
   object-fit: contain;
   overflow: hidden;
   border-radius: 8px;
 }
-.preview__title {
+.modal__preview-title {
   margin: 8px 0 0 0;
   font-size: 20px;
   line-height: 15px;
