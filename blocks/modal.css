@@ -9,15 +9,19 @@
   align-items: center;
   justify-content: center;
   visibility: hidden;
+  transition: 0.3s, 0.3s, ease-in;
+  opacity: 0;
 }
 
 .modal_opened {
   visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
   background: #fff;
-  padding: 32px 52px;
+  padding: 32px 10px;
+
   max-width: 730px;
   display: flex;
   flex-direction: column;
@@ -104,7 +108,7 @@
 }
 
 .modal__preview-image {
-  max-width: 80vw;
+  max-width: 90vw;
   max-height: 80vh;
   object-fit: contain;
   overflow: hidden;
