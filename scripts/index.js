@@ -35,7 +35,7 @@ const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
 const editModal = document.querySelector("#edit-modal");
-const editFormElement = editModal.querySelector(".modal__form");
+const editFormElement = editModal.querySelector("#modal__form");
 const editModalCloseBtn = editModal.querySelector(".modal__close-btn");
 const editModalNameInput = editModal.querySelector("#profile-name-input");
 const editModalDescriptionInput = editModal.querySelector(
@@ -81,16 +81,16 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
 
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
-  cardLikeBtn.addEventListener("click", () => {
+  cardLikeBtn.addEventListener("click", function () {
     cardLikeBtn.classList.toggle("card__like-btn_active");
   });
 
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
   cardDeleteBtn.addEventListener("click", function () {
-    cardDeleteBtn.closest(".card").remove();
+    cardElement.remove();
   });
 
-  cardImageEl.addEventListener("click", () => {
+  cardImageEl.addEventListener("click", function () {
     previewImage.src = data.link;
     previewImage.alt = data.name;
     previewTitle.textContent = data.name;
@@ -117,7 +117,7 @@ addCardFormElement.addEventListener("submit", function (evt) {
   const cardElement = getCardElement(inputValues);
   cardList.prepend(cardElement);
 
-  closeModal(addCardModal);
+  addCardFormElement.reset();
 });
 
 newPostButton.addEventListener("click", function () {
@@ -148,7 +148,3 @@ initialCards.forEach(function (item) {
   const cardElement = getCardElement(item);
   cardList.append(cardElement);
 });
-
-// TODO
-// 2. get image insert src atribute and title elemnt insert text (style preview title according to figma)
-// 3. close modal needs to be added and styled according to figma for both screen siz
