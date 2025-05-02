@@ -21,13 +21,12 @@
 .modal__container {
   background: #fff;
   padding: 32px 10px;
-
   max-width: 730px;
   display: flex;
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
-  width: 80vw;
+  width: 100%;
   border-radius: 8px;
 }
 
