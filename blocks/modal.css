@@ -70,6 +70,7 @@
 
 .modal__input {
   padding: 16px 12px;
+  margin: 8px 0 0;
   font-weight: 500;
   font-size: 20px;
   line-height: 1;
@@ -143,6 +144,14 @@
 .modal__preview-close-btn:hover {
   cursor: pointer;
   opacity: 60%;
+}
+
+.modal__error {
+  display: block;
+  color: #ff0000;
+  opacity: 70%;
+  font-size: 16px;
+  margine-top: 8px;
 }
 
 @media screen and (max-width: 627px) {
