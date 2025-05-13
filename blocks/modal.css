@@ -78,6 +78,11 @@
   border-radius: 8px;
 }
 
+.modal__input_state_error {
+  border: 1px solid #ff0000;
+  opacity: 60%;
+}
+
 .modal__input:hover {
   cursor: pointer;
   border: solid 1px rgba(33, 33, 33, 1);
