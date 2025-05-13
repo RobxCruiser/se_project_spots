@@ -56,7 +56,12 @@
         <div class="modal__container">
           <button class="modal__close-btn"></button>
           <h2 class="modal__title">Edit profile</h2>
-          <form name="edit-profile" id="modal-form" class="modal__form">
+          <form
+            name="edit-profile"
+            id="modal-form"
+            class="modal__form"
+            novalidate
+          >
             <label class="modal__label"
               >Name
               <input
@@ -96,7 +101,7 @@
         <div class="modal__container">
           <button class="modal__close-btn"></button>
           <h2 class="modal__title">New post</h2>
-          <form name="add-card-form" class="modal__form">
+          <form name="add-card-form" class="modal__form" novalidate>
             <label class="modal__label"
               >Image Link
               <input

@@ -20,12 +20,40 @@ const checkInputValidity = (formEl, inputElement) => {
   }
 };
 
+const hasInvalidInput = (inputList) => {
+return inputList.some((input) => {
+  return !input.validity.valid;
+})
+}
+
+const toggleButtonState = (inputList, buttonEl) => {
+if (hasInvalidInput(inputList)){
+disableButton(buttonEl)
+}else{
+  buttonEl.disabled = false;
+  // todo --Remove the disabled class
+}
+}
+
+const disableButton = (buttonEl) =>{
+buttonEl.disabled = true;
+// todo -- add a modifier class to the button Element to make it gray.
+//Dont forget the CSS
+}
+
+//Optional
+const resetValidation = (formEl, inputList) => {
+inputList.forEach((input) => {
+  hideInputError(formEl, input)
+});
+disableButton()
+};
+
 const setEventListeners = (formEl) => {
   const inputList = Array.from(formEl.querySelectorAll(".modal__input"));
   const buttonElement = formEl.querySelector(".modal__button");
 
-  // todo - handle initial states
-  // toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
