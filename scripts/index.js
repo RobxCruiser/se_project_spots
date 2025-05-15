@@ -1,3 +1,5 @@
+// TODO - pass settings object to the validation functions that are called in this file.
+
 const initialCards = [
   {
     name: "San Francisco",
@@ -34,6 +36,7 @@ const profileEditButton = document.querySelector(".profile__edit-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
+const allModals = document.querySelectorAll(".modal");
 const editModal = document.querySelector("#edit-modal");
 const editFormElement = editModal.querySelector("#modal-form");
 const editModalCloseBtn = editModal.querySelector(".modal__close-btn");
@@ -61,12 +64,34 @@ const previewCloseButton = previewModal.querySelector(
   ".modal__preview-close-btn"
 );
 
+//overlay and escape handlers
+
+let currentOverlayHandler;
+let currentEscHandler;
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
+
+  currentOverlayHandler = function (event) {
+    if (event.target === event.currentTarget) {
+      closeModal(modal);
+    }
+  };
+
+  currentEscHandler = function (evt) {
+    if (evt.key === "Escape") {
+      closeModal(modal);
+    }
+  };
+
+  modal.addEventListener("click", currentOverlayHandler);
+  document.addEventListener("keydown", currentEscHandler);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  modal.removeEventListener("click", currentOverlayHandler);
+  document.removeEventListener("keydown", currentEscHandler);
 }
 
 function getCardElement(data) {
@@ -117,7 +142,7 @@ addCardFormElement.addEventListener("submit", function (evt) {
   };
   const cardElement = getCardElement(inputValues);
   cardList.prepend(cardElement);
-  disableButton(cardSubmitButton);
+  disableButton(cardSubmitButton, settings);
   closeModal(addCardModal);
 
   addCardFormElement.reset();
@@ -131,7 +156,11 @@ profileEditButton.addEventListener("click", function () {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
   //optional
-  resetValidation(editModal, [editModalNameInput, editModalDescriptionInput]);
+  resetValidation(
+    editFormElement,
+    [editModalNameInput, editModalDescriptionInput],
+    settings
+  );
   openModal(editModal);
 });
 

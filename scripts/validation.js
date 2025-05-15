@@ -1,73 +1,90 @@
-const showInputError(formEl, inputEl, errorMsg){
+// Declaring a configuration object that contains the
+// necessary classes and selectors.
+const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const showInputError = (formEl, inputEl, errorMsg, config) => {
   const errorMsgID = inputEl.id + "-error";
   const errorMsgEl = formEl.querySelector("#" + errorMsgID);
-  errorMsgEl.textContent = errorMsg
-  inputEl.classList.add("modal__input_state_error");
-}
+  errorMsgEl.textContent = errorMsg;
+  inputEl.classList.add(config.inputErrorClass);
+};
 
-const showInputError(formEl, inputEl){
+const hideInputError = (formEl, inputEl, config) => {
+  const errorMsgID = inputEl.id + "-error"; // Add this line
   const errorMsgEl = formEl.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = "";
-  inputEl.classList.remove("modal__input_state_error");
-}
+  inputEl.classList.remove(config.inputErrorClass);
+};
 
-
-const checkInputValidity = (formEl, inputElement) => {
+const checkInputValidity = (formEl, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(formEl, inputEl, inputEl.validationMessage);
+    showInputError(
+      formEl,
+      inputElement,
+      inputElement.validationMessage,
+      config
+    );
   } else {
-    hideInputError(formEl, inputEl);
+    hideInputError(formEl, inputElement, config);
   }
 };
 
 const hasInvalidInput = (inputList) => {
-return inputList.some((input) => {
-  return !input.validity.valid;
-})
-}
-
-const toggleButtonState = (inputList, buttonEl) => {
-if (hasInvalidInput(inputList)){
-disableButton(buttonEl)
-}else{
-  buttonEl.disabled = false;
-  // todo --Remove the disabled class
-}
-}
-
-const disableButton = (buttonEl) =>{
-buttonEl.disabled = true;
-// todo -- add a modifier class to the button Element to make it gray.
-//Dont forget the CSS
-}
-
-//Optional
-const resetValidation = (formEl, inputList) => {
-inputList.forEach((input) => {
-  hideInputError(formEl, input)
-});
-disableButton()
+  return inputList.some((input) => {
+    return !input.validity.valid;
+  });
 };
 
-const setEventListeners = (formEl) => {
-  const inputList = Array.from(formEl.querySelectorAll(".modal__input"));
-  const buttonElement = formEl.querySelector(".modal__button");
+const toggleButtonState = (inputList, buttonEl, config) => {
+  if (hasInvalidInput(inputList)) {
+    disableButton(buttonEl, config);
+  } else {
+    buttonEl.disabled = false;
+    buttonEl.classList.remove(config.inactiveButtonClass);
+  }
+};
 
-  toggleButtonState(inputList, buttonElement);
+const disableButton = (buttonEl, config) => {
+  buttonEl.disabled = true;
+  buttonEl.classList.add(config.inactiveButtonClass);
+};
+
+//Optional
+const resetValidation = (formEl, inputList, config) => {
+  inputList.forEach((input) => {
+    hideInputError(formEl, input, config);
+  });
+  const buttonElement = formEl.querySelector(config.submitButtonSelector);
+  console.log(buttonElement);
+  disableButton(buttonElement, config);
+};
+
+const setEventListeners = (formEl, config) => {
+  const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
+  const buttonElement = formEl.querySelector(config.submitButtonSelector);
+
+  toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(formEl, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formEl, inputElement, config);
+      toggleButtonState(inputList, buttonElement, config);
     });
   });
 };
 
-const enableValidation = () => {
-  const formList = document.querySelectorAll(".modal__form");
+const enableValidation = (config) => {
+  const formList = document.querySelectorAll(config.formSelector);
   formList.forEach((formEl) => {
-    setEventListeners(formEl);
+    setEventListeners(formEl, config);
   });
 };
 
-enableValidation();
+enableValidation(settings);
