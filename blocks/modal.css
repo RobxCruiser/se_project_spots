@@ -11,6 +11,7 @@
   visibility: hidden;
   transition: visibility 0.3s, opacity 0.3s ease-in;
   opacity: 0;
+  padding: 10px;
 }
 
 .modal_opened {
@@ -20,7 +21,7 @@
 
 .modal__container {
   background: #fff;
-  padding: 32px 10px;
+  padding: 32px 50px;
   max-width: 730px;
   display: flex;
   flex-direction: column;
@@ -55,9 +56,7 @@
   font-size: 32px;
   line-height: 32px;
 }
-.modal__form {
-  margin-top: 32px;
-}
+
 .modal__label {
   display: flex;
   flex-direction: column;
@@ -107,6 +106,7 @@
   line-height: 1;
   background-color: #212121;
   color: #fcf5e5;
+  border: none;
 }
 
 .modal__button:hover {
@@ -146,6 +146,7 @@
   top: 0px;
   right: -40px;
   background-image: url(../images/preview-close-btn.svg);
+  color: #212121;
 }
 
 .modal__preview-close-btn:hover {
