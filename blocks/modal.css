@@ -51,6 +51,7 @@
 }
 
 .modal__title {
+  color: #212121;
   margin: 0 0 32px;
   font-weight: 500;
   font-size: 32px;
@@ -65,8 +66,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.1;
-  color: #212121;
-  opacity: 70%;
+  color: rgba(33, 33, 33, 0.7);
 }
 
 .modal__input {
@@ -89,7 +89,7 @@
   border: solid 1px rgba(33, 33, 33, 1);
 }
 
-.modal__input:user-valid {
+.modal__input:valid {
   opacity: 100%;
   color: #212121;
 }
@@ -159,13 +159,11 @@
   color: #ff0000;
   opacity: 70%;
   font-size: 16px;
-  margine-top: 8px;
+  margin-top: 8px;
 }
 
 .modal__button_disabled {
-  background-color: #e5e5e5;
-  color: #000000;
-  opacity: 0.2;
+  background-color: rgba(33, 33, 33, 0.5);
   pointer-events: none;
 }
 
@@ -193,7 +191,7 @@
     right: 12px;
   }
 
-  .modal__submit-btn {
+  .modal__button {
     width: 100%;
   }
   .modal__preview-close-btn {
