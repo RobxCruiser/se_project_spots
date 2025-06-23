@@ -1,4 +1,9 @@
-// TODO - pass settings object to the validation functions that are called in this file.
+import "./index.css";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation.js";
 
 const initialCards = [
   {
@@ -182,3 +187,5 @@ initialCards.forEach(function (item) {
   const cardElement = getCardElement(item);
   cardList.append(cardElement);
 });
+
+enableValidation(settings);
