@@ -4,7 +4,7 @@ import {
   settings,
   resetValidation,
 } from "../scripts/validation.js";
-import Api from "../scripts/Api.js";
+import Api from "../utils/Api.js";
 
 // const initialCards = [
 //   {
@@ -45,17 +45,28 @@ const api = new Api({
   },
 });
 
-api.getInitialCards().then((cards) => {
-  cards.forEach((item) => {
-    const cardElement = getCardElement(item);
-    cardList.append(cardElement);
+api
+  .getAppInfo()
+  .then(({ cards, userData }) => {
+    //console.log(cards);
+    cards.forEach((item) => {
+      const cardElement = getCardElement(item);
+      cardList.append(cardElement);
+    });
+    //console.log(userData);
+    profileName.textContent = userData.name;
+    profileDescription.textContent = userData.about;
+    profileImg.src = userData.avatar;
+  })
+  .catch((err) => {
+    console.error(err);
   });
-});
 
 // Edit profile
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+const profileImg = document.querySelector(".profile__avatar");
 
 const allModals = document.querySelectorAll(".modal");
 const editModal = document.querySelector("#edit-modal");
@@ -149,9 +160,19 @@ function getCardElement(data) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      //todo - Use Data argument instead of the inputvaluse
+      console.log(data);
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 addCardFormElement.addEventListener("submit", function (evt) {
