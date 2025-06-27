@@ -26,17 +26,22 @@ class Api {
     });
   }
 
-  //Create another Method, getUserInfo(different base url)
+  addNewCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._handleThen);
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleThen);
   }
 
   editUserInfo({ name, about }) {
@@ -48,13 +53,20 @@ class Api {
         name,
         about,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleThen);
   }
+
+  deletePost(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._handleThen);
+  }
+
+  _handleThen = (res) => {
+    if (res.ok) return res.json();
+    return Promise.reject(`Error: ${res.status}`);
+  };
 
   // other methods for working with the API
 }

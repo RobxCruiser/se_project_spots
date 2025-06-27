@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
@@ -96,10 +97,18 @@ const previewCloseButton = previewModal.querySelector(
   ".modal__preview-close-btn"
 );
 
+//Delete Window
+const deleteModal = document.querySelector("#Delete-card-modal");
+const deleteCloseButton = deleteModal.querySelector(".modal__close-btn");
+const deleteButton = document.querySelector(".modal__button_delete");
+const cancelDeleteButton = document.querySelector(".modal__button_cancel");
+
 //overlay and escape handlers
 
 let currentOverlayHandler;
 let currentEscHandler;
+let currentSelectedCard;
+let currentCardId;
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -145,7 +154,9 @@ function getCardElement(data) {
 
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
   cardDeleteBtn.addEventListener("click", function () {
-    cardElement.remove();
+    currentSelectedCard = cardElement;
+    currentCardId = data._id;
+    openModal(deleteModal);
   });
 
   cardImageEl.addEventListener("click", function () {
@@ -166,7 +177,6 @@ function handleEditFormSubmit(evt) {
       about: editModalDescriptionInput.value,
     })
     .then((data) => {
-      //todo - Use Data argument instead of the inputvaluse
       console.log(data);
       profileName.textContent = data.name;
       profileDescription.textContent = data.about;
@@ -175,6 +185,21 @@ function handleEditFormSubmit(evt) {
     .catch(console.error);
 }
 
+deleteButton.addEventListener("click", function () {
+  api
+    .deletePost(currentCardId)
+    .then((res) => {
+      console.log(res.message);
+      currentSelectedCard.remove();
+      closeModal(deleteModal);
+    })
+    .catch(console.error);
+});
+
+cancelDeleteButton.addEventListener("click", () => closeModal(deleteModal));
+
+deleteCloseButton.addEventListener("click", () => closeModal(deleteModal));
+
 addCardFormElement.addEventListener("submit", function (evt) {
   evt.preventDefault();
 
@@ -182,14 +207,20 @@ addCardFormElement.addEventListener("submit", function (evt) {
     name: addCardTitle.value,
     link: addCardLink.value,
   };
-  const cardElement = getCardElement(inputValues);
-  cardList.prepend(cardElement);
-  disableButton(cardSubmitButton, settings);
-  closeModal(addCardModal);
 
-  addCardFormElement.reset();
+  api
+    .addNewCard(inputValues)
+    .then((newCardData) => {
+      const cardElement = getCardElement(newCardData);
+      cardList.prepend(cardElement);
+      closeModal(addCardModal);
+      addCardFormElement.reset();
+      disableButton(cardSubmitButton, settings);
+    })
+    .catch((err) => {
+      console.error("Failed to add card:", err);
+    });
 });
-
 newPostButton.addEventListener("click", function () {
   openModal(addCardModal);
 });

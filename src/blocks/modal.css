@@ -143,8 +143,8 @@
 }
 
 .modal__preview-close-btn {
-  top: 0px;
-  right: -40px;
+  top: -10px;
+  right: -52px;
   background-image: url(../images/preview-close-btn.svg);
   color: #212121;
 }
@@ -167,7 +167,52 @@
   pointer-events: none;
 }
 
-@media screen and (max-width: 627px) {
+.modal__container_delete {
+  max-width: 630px;
+  display: flex;
+}
+
+.modal__title_delete {
+  font-size: clamp(20px, 2.5vw, 24px);
+  text-align: center;
+}
+
+.modal__controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.modal__button_delete {
+  background-color: #ff6565;
+  color: #212121;
+}
+
+.modal__button_cancel {
+  background-color: transparent;
+  color: #212121;
+  border: 1px solid #212121;
+}
+
+.modal__button_delete,
+.modal__button_cancel {
+  max-width: min(156px, 100%);
+}
+
+.modal__button_delete:hover {
+  cursor: hover;
+  background-color: #ff3333;
+  opacity: 1;
+}
+
+.modal__button_cancel:hover {
+  cursor: hover;
+  background-color: #212121;
+  color: #fff;
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
   .modal__container {
     padding: 12px;
     margin: 0 10px;
@@ -195,7 +240,7 @@
     width: 100%;
   }
   .modal__preview-close-btn {
-    top: -36px;
+    top: -56px;
     right: 0;
   }
 
@@ -205,5 +250,11 @@
 
   .modal__image-preview {
     padding: 0;
+  }
+
+  .modal__controls {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
   }
 }
