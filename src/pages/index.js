@@ -148,8 +148,26 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
 
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
+
+  if (data.isLiked) {
+    cardLikeBtn.classList.add("card__like-btn_active");
+  }
+
   cardLikeBtn.addEventListener("click", function () {
-    cardLikeBtn.classList.toggle("card__like-btn_active");
+    const isLiked = cardLikeBtn.classList.contains("card__like-btn_active");
+
+    api
+      .toggleLike(isLiked, data._id)
+      .then((res) => {
+        console.log(res);
+
+        if (res.isLiked) {
+          cardLikeBtn.classList.add("card__like-btn_active");
+        } else {
+          cardLikeBtn.classList.remove("card__like-btn_active");
+        }
+      })
+      .catch(console.error);
   });
 
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
