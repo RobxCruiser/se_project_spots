@@ -77,6 +77,7 @@ const editModalNameInput = editModal.querySelector("#profile-name-input");
 const editModalDescriptionInput = editModal.querySelector(
   "#profile-description-input"
 );
+const editProfileSubmit = editModal.querySelector(".modal__button");
 // New Post Button
 const newPostButton = document.querySelector(".profile__add-btn");
 const addCardModal = document.querySelector("#add-card-modal");
@@ -117,6 +118,12 @@ let currentOverlayHandler;
 let currentEscHandler;
 let currentSelectedCard;
 let currentCardId;
+
+const setLoadingState = (element, message) => {
+  element.textContent = message;
+  element.classList.add("modal__button_disabled");
+  element.disabled = true;
+};
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -197,6 +204,7 @@ function getCardElement(data) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
+  setLoadingState(editProfileSubmit, "Saving...");
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -208,10 +216,14 @@ function handleEditFormSubmit(evt) {
       profileDescription.textContent = data.about;
       closeModal(editModal);
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => (editProfileSubmit.textContent = "Save"));
 }
 
 deleteButton.addEventListener("click", function () {
+  setLoadingState(deleteButton, "Deleting...");
   api
     .deletePost(currentCardId)
     .then((res) => {
@@ -219,7 +231,12 @@ deleteButton.addEventListener("click", function () {
       currentSelectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      deleteButton.textContent = "Delete";
+      deleteButton.disabled = false;
+      deleteButton.classList.remove("modal__button_disabled");
+    });
 });
 
 cancelDeleteButton.addEventListener("click", () => closeModal(deleteModal));
@@ -228,7 +245,7 @@ deleteCloseButton.addEventListener("click", () => closeModal(deleteModal));
 
 addCardFormElement.addEventListener("submit", function (evt) {
   evt.preventDefault();
-
+  setLoadingState(cardSubmitButton, "Saving...");
   const inputValues = {
     name: addCardTitle.value,
     link: addCardLink.value,
@@ -241,11 +258,12 @@ addCardFormElement.addEventListener("submit", function (evt) {
       cardList.prepend(cardElement);
       closeModal(addCardModal);
       addCardFormElement.reset();
-      disableButton(cardSubmitButton, settings);
     })
     .catch((err) => {
       console.error("Failed to add card:", err);
-    });
+      cardSubmitButton.disabled = false;
+    })
+    .finally(() => (cardSubmitButton.textContent = "Save"));
 });
 
 newPostButton.addEventListener("click", function () {
@@ -272,6 +290,7 @@ avatarClostButton.addEventListener("click", () => {
 
 avatarForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  setLoadingState(avatarFormSubmit, "Saving...");
   console.log(avatarInput.value);
   api
     .changeProfilePic(avatarInput.value)
@@ -280,7 +299,10 @@ avatarForm.addEventListener("submit", function (evt) {
       profileImg.src = res.avatar;
       closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => (avatarFormSubmit.textContent = "Save"));
 });
 
 editModalCloseBtn.addEventListener("click", function () {

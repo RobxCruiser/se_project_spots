@@ -60,7 +60,6 @@ export const resetValidation = (formEl, inputList, config) => {
     hideInputError(formEl, input, config);
   });
   const buttonElement = formEl.querySelector(config.submitButtonSelector);
-  console.log(buttonElement);
   disableButton(buttonElement, config);
 };
 
