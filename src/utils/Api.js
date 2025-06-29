@@ -48,7 +48,6 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      // Send the data in the body as a JSON string.
       body: JSON.stringify({
         name,
         about,
@@ -67,6 +66,14 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
+    }).then(this._handleThen);
+  }
+
+  changeProfilePic(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ avatar }),
     }).then(this._handleThen);
   }
 

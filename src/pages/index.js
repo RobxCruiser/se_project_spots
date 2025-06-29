@@ -103,6 +103,14 @@ const deleteCloseButton = deleteModal.querySelector(".modal__close-btn");
 const deleteButton = document.querySelector(".modal__button_delete");
 const cancelDeleteButton = document.querySelector(".modal__button_cancel");
 
+// Avatar Modal
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarForm = avatarModal.querySelector("#edit-avatar-form");
+const openAvatarform = document.querySelector(".profile__avatar-btn");
+const avatarClostButton = avatarModal.querySelector(".modal__close-btn");
+const avatarInput = avatarModal.querySelector("#profile-avatar-input");
+const avatarFormSubmit = avatarModal.querySelector(".modal__button");
+
 //overlay and escape handlers
 
 let currentOverlayHandler;
@@ -239,6 +247,7 @@ addCardFormElement.addEventListener("submit", function (evt) {
       console.error("Failed to add card:", err);
     });
 });
+
 newPostButton.addEventListener("click", function () {
   openModal(addCardModal);
 });
@@ -253,6 +262,25 @@ profileEditButton.addEventListener("click", function () {
     settings
   );
   openModal(editModal);
+});
+
+openAvatarform.addEventListener("click", () => openModal(avatarModal));
+
+avatarClostButton.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
+
+avatarForm.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  console.log(avatarInput.value);
+  api
+    .changeProfilePic(avatarInput.value)
+    .then((res) => {
+      console.log(res);
+      profileImg.src = res.avatar;
+      closeModal(avatarModal);
+    })
+    .catch(console.error);
 });
 
 editModalCloseBtn.addEventListener("click", function () {

@@ -43,12 +43,6 @@
   object-fit: cover;
 }
 
-/* .profile__avatar:hover {
-  opacity: 50%;
-  background-color: #000;
-  z-index: 1;
-} */
-
 .profile__column {
   display: flex;
   flex-direction: column;
