@@ -19,12 +19,20 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="Bessie Coleman photo"
-            class="profile__avatar"
-          />
-
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-btn">
+              <img
+                src="<%=require('./images/pencil-light.svg')%>"
+                alt="Pencil icon"
+                class="profile__pecil-icon"
+              />
+            </button>
+            <img
+              src="<%=require('./images/avatar.jpg')%>"
+              alt="Bessie Coleman photo"
+              class="profile__avatar"
+            />
+          </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
@@ -163,6 +171,50 @@
           <img alt="" class="modal__preview-image" />
           <h2 class="modal__preview-title"></h2>
         </div>
+      </div>
+    </div>
+    <div id="edit-modal" class="modal">
+      <div class="modal__container">
+        <button class="modal__close-btn"></button>
+        <h2 class="modal__title">Edit profile</h2>
+        <form
+          name="edit-profile"
+          id="modal-form"
+          class="modal__form"
+          novalidate
+        >
+          <label class="modal__label"
+            >Name
+            <input
+              id="profile-name-input"
+              type="text"
+              class="modal__input"
+              required
+              placeholder="Type your name"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span id="profile-name-input-error" class="modal__error"></span>
+          </label>
+          <label id="" class="modal__label"
+            >Description
+            <input
+              id="profile-description-input"
+              type="text"
+              class="modal__input"
+              placeholder="describe yourself"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              id="profile-description-input-error"
+              class="modal__error"
+            ></span>
+          </label>
+          <button type="submit" class="modal__button">Save</button>
+        </form>
       </div>
     </div>
   </body>
